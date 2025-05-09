@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 34  // نسخه SDK که برای بیلد استفاده می‌شود
+
+    defaultConfig {
+        applicationId "com.example.simplevpn"
+        minSdk 24  // حداقل نسخه اندروید
+        targetSdk 34  // نسخه هدف اندروید
+        versionCode 1
+        versionName "1.0"
+
+        // دسترسی به سرویس VPN
+        manifestPlaceholders = [vpnServicePermission: "android.permission.BIND_VPN_SERVICE"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+}
