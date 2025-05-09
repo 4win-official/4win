@@ -4,17 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 34  // نسخه SDK که برای بیلد استفاده می‌شود
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.simplevpn"
-        minSdk 24  // حداقل نسخه اندروید
-        targetSdk 34  // نسخه هدف اندروید
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-
-        // دسترسی به سرویس VPN
-        manifestPlaceholders = [vpnServicePermission: "android.permission.BIND_VPN_SERVICE"]
     }
 
     buildTypes {
@@ -26,8 +23,7 @@ android {
 }
 
 dependencies {
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "androidx.core:core-ktx:1.9.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation "com.google.android.material:material:1.9.0"
 }
