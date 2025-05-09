@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <!-- نمایش وضعیت اتصال -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="وضعیت: قطع ❌"
+        android:textSize="18sp"
+        android:textColor="#FF0000"
+        android:paddingBottom="20dp"/>
+
+    <!-- دکمه اتصال -->
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اتصال VPN"
+        android:textSize="16sp"
+        android:padding="10dp"/>
+
+    <!-- دکمه قطع اتصال -->
+    <Button
+        android:id="@+id/disconnectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="قطع VPN"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
