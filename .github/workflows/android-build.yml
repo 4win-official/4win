@@ -26,11 +26,11 @@ jobs:
       - name: Accept Android SDK Licenses
         run: yes | sdkmanager --licenses || true
 
-      - name: Validate Gradle Wrapper
-        run: ./gradlew --version
-
       - name: Grant execute permission for Gradlew
         run: chmod +x gradlew
+
+      - name: Validate Gradle Wrapper
+        run: ./gradlew --version
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3
