@@ -1,0 +1,66 @@
+package com.example.simplevpn
+
+import okhttp3.*
+import org.json.JSONArray
+import java.io.IOException
+import java.net.InetAddress
+
+object NetworkUtils {
+    private val client = OkHttpClient()
+
+    // ✅ دریافت کانفیگ‌ها از GitHub
+    fun fetchServerConfigs(url: String, callback: (List<ServerConfig>) -> Unit) {
+        val request = Request.Builder().url(url).build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val jsonData = response.body?.string()
+                if (jsonData != null) {
+                    val servers = parseJson(jsonData)
+                    callback(servers)
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+        })
+    }
+
+    // ✅ تبدیل JSON به لیست سرورها
+    private fun parseJson(jsonData: String): List<ServerConfig> {
+        val jsonArray = JSONArray(jsonData)
+        val servers = mutableListOf<ServerConfig>()
+
+        for (i in 0 until jsonArray.length()) {
+            val obj = jsonArray.getJSONObject(i)
+            servers.add(
+                ServerConfig(
+                    obj.getString("host"),
+                    obj.getInt("port"),
+                    obj.getString("password"),
+                    obj.getString("protocol")
+                )
+            )
+        }
+        return servers
+    }
+
+    // ✅ تست پینگ سرورها
+    fun getPing(host: String): Int {
+        return try {
+            val start = System.currentTimeMillis()
+            val address = InetAddress.getByName(host)
+            val reachable = address.isReachable(3000) // 3 ثانیه تایم‌اوت
+            val end = System.currentTimeMillis()
+            if (reachable) (end - start).toInt() else Int.MAX_VALUE
+        } catch (e: Exception) {
+            Int.MAX_VALUE
+        }
+    }
+
+    // ✅ انتخاب سریع‌ترین سرور
+    fun selectBestServer(servers: List<ServerConfig>): ServerConfig {
+        return servers.minByOrNull { getPing(it.host) } ?: servers.first()
+    }
+}
