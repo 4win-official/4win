@@ -26,4 +26,14 @@ dependencies {
     implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "com.google.android.material:material:1.9.0"
+
+    // ✅ اضافه کردن OkHttp برای دریافت JSON از GitHub
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+
+    // ✅ اضافه کردن وابستگی‌های مربوط به VPN و شبکه
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.work:work-runtime-ktx:2.8.1"
+
+    // ✅ اضافه کردن Kotlin Gradle Plugin
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20"
 }
